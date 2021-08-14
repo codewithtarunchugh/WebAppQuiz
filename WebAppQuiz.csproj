@@ -113,7 +113,6 @@
       <DependentUpon>QuizDBModel.edmx</DependentUpon>
       <LastGenOutput>QuizDBModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Screenshot %284%29.png" />
     <Content Include="Screenshot %285%29.png" />
     <Content Include="Screenshot %286%29.png" />
     <Content Include="Screenshot %287%29.png" />
