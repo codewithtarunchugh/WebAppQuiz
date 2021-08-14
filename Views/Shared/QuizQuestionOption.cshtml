@@ -1,0 +1,50 @@
+﻿@model WebAppQuiz.ViewModel.QuizQuestionAnswerViewModel
+<style type="text/css">
+
+    fieldset {
+        font-family: sans-serif;
+        border: 3px solid #1F497D;
+        background: #ddd;
+        border-radius: 5px;
+        padding: 15px;
+    }
+
+        fieldset legend {
+            background: #1F497D;
+            color: #fff;
+            padding: 5px 10px 10px 20px;
+            font-size: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 5px #ddd;
+            margin-left: 1px;
+            margin-right: 10px;
+        }
+</style>
+@Html.HiddenFor(model => model.QuestionId, new { id = "txtQuestionId" })
+
+<fieldset>
+    <legend>@Model.QuestionName</legend>
+    <table style="width:100%" class="table table-condensed" id="tblQuestionOption">
+        @foreach (var item in Model.ListOfQuizOption)
+        {
+            <tr>
+                <td>
+                    @Html.RadioButtonFor(model => model.OptionId, item.OptionName) @item.OptionName
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                @if (Model.IsLast)
+                {
+                    <input type="button" name="Save" value="Save" class="btn btn-success" id="btnSave" onclick="SaveCandidateAnswer()" />
+                }
+                else
+                {
+                    <input type="button" name="Next" value="Next" class="btn btn-primary" id="btnNext" onclick="LoadQuestion()" />
+                }
+            </td>
+        </tr>
+
+    </table>
+</fieldset>

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "QuestionIndex";
+}
+<script src="~/Scripts/jquery-1.8.0.min.js"></script>
+
+<h2>QuestionIndex</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadQuestion();
+
+    });
+    function SaveCandidateAnswer() {
+
+        var answerText = "";
+        $.each($("#tblQuestionOption tr").find("td:eq(0) input[type=radio]:checked"),
+            function () {
+                answerText = $(this).val();
+            }
+        );
+        var CandidateAnswer = { QuestionId: $("#txtQuestionId").val(), AnswerText: answerText }
+        $.ajax({
+            async: true,
+            type: 'GET',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: CandidateAnswer,
+            url: '/Quiz/SaveCandidateAnswer',
+            success: function (data) {
+                if (data.success === true) {
+                    alert(data.message);
+                    window.location.href = "/Quiz/GetFinalResult";
+                }
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+
+    }
+    function LoadQuestion() {
+      
+        var answerText = "";
+        $.each($("#tblQuestionOption tr").find("td:eq(0) input[type=radio]:checked"),
+            function () {
+                answerText = $(this).val();
+
+            });
+        var CandidateAnswer = { QuestionId: $("#txtQuestionId").val(), AnswerText: answerText }
+
+        $.ajax({
+            async: true,
+            type: 'GET',
+            dataType: 'HTML',
+            contentType: 'application/json; charset=utf-8',
+            url: '/Quiz/UserQuestionAnswer',
+            data: CandidateAnswer,
+            success: function (data) {
+                $("#divQuestionOption").html(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    }
+</script>
+<div id="divQuestionOption">
+
+</div>

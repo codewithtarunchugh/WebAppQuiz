@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebAppQuiz.ViewModel.ResultModel>
+@{
+    ViewBag.Title = "GetFinalResult";
+}
+
+<h2>GetFinalResult</h2>
+
+<table style="width:100%" class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                Question
+            </td>
+            <td>
+                Answer
+            </td>
+            <td>
+                Answer by User
+            </td>
+            <td>
+                Status
+            </td>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Question
+            </td>
+            <td>
+                @item.Answer
+            </td>
+            <td>
+                @item.AnswerByUser
+            </td>
+            <td>
+                @if (item.Status == "Correct")
+                {
+                    <label style="color:green">@item.Status</label>
+                }
+                else
+                {
+                    <label style="color:red">@item.Status</label>
+                }
+            </td>
+        </tr>
+    }
+</table>
